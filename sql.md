@@ -37,20 +37,14 @@ Results:
 SQL:
     SELECT developers.name, group_id
     FROM developers
-    LEFT JOIN group_assignments
+    JOIN group_assignments
     ON developers.id = group_assignments.developer_id
-    WHERE group_assignments.group_id = 3;
+    JOIN groups
+    ON group_assignments.group_id = groups.id
+    WHERE groups.name = "Ohio sheep";
 Results:
     3 rows returned in 7ms
-    <!-- tried to get this one to work with the actual text "Ohio Sheep" and got hung up in syntax errors, so scaled it back to using the group id, assuming that the person querying would know. My best try was:
-    SELECT developers.name, group_id
-    FROM developers
-    LEFT JOIN group_assignments
-    ON developers.id = group_assignments.developer_id
-    LEFT JOIN groups
-    ON group_assignments.group_id = groups.id
-    WHERE groups.name = "Ohio Sheep";-->
-
+    
 - Find the total number of hours worked for each client.
 SQL: 
     SELECT time_entries.duration
